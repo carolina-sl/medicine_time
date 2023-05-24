@@ -10,10 +10,6 @@ class Request {
         'copo'
     ];
 
-    public function teste() {
-        var_dump($this->request->dados);
-    }
-
     
     
 
