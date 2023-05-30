@@ -11,9 +11,4 @@ class Pessoa {
         var_dump($pessoa);
     }
 
-    
-    
-
-    
-    
 }

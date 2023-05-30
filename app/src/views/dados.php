@@ -1,93 +1,144 @@
 <?php
 
-    require __DIR__ . '/../classes/Pessoa.php';
-    require __DIR__ . '/../classes/Remedio.php';
-    require __DIR__ . '/../classes/Request.php';
+require __DIR__ . '/../classes/Pessoa.php';
+require __DIR__ . '/../classes/Remedio.php';
+require __DIR__ . '/../classes/Request.php';
 
-    $diaInteiro = 24;
-
-    $nome = $_POST['nome'] ? $_POST['nome'] : 0;
-    $remedio = $_POST['remedio'] ? $_POST['remedio'] : 0;
-    $intervalo = $_POST['intervalo'] ? $_POST['intervalo'] : 0;
-    $horarioInicial = $_POST['horario_inicial'] ? intval($_POST['horario_inicial']) : 0;
-
-    $request = new Request();
 ?>
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="estilos.css">
-        <title>Document</title>
-        <div class="divh2">
-            <h2> HORÁRIOS DO SEU REMÉDIO </h2>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>hora do remédio</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+       <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+            </ul>
         </div>
-        
-    </head>
-    <body>
-        
-    </body>
-    </html>
+    </nav>
+
+<form action="dados.php" method="POST">
+    <div class="container">
+        <div class="mt-3">
+            <h2> Hora do remédio </h2>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="nome">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Remédio:</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="remedio">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Intervalo (horas):</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="intervalo">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Horário Inicial</label>
+            <input type="time" class="form-control" id="exampleFormControlInput1" name="horario">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">ENVIAR</button>
+            <button type="reset" class="btn btn-danger" href="index.php">LIMPAR</button>
+        </div>
+    </div>
+</form>
 
 <?php
 
-    $horaAtualizada = $intervalo + $horarioInicial;
-    switch ($intervalo) {
+$diaInterio = 24;
 
-        case 2:
-            $resultado = $diaInteiro / $intervalo;
-            echo "<div class='divh2'> - $resultado AM  <br> - $resultado PM";
-            echo "<div class='divh2'><br><br>Seu remédio é de $intervalo/$intervalo horas. </div>";
-            break;
+$nome = !empty($_POST['nome']) ? $_POST['nome'] : 0;
+$remedio = !empty($_POST['remedio']) ? $_POST['remedio'] : 0;
+$intervalo = !empty($_POST['intervalo']) ? $_POST['intervalo'] : 1;
+$horario = !empty($_POST['horario']) ? $_POST['horario'] : 0;
 
-        case 4:     
-            $resultado = $diaInteiro / $intervalo;
-            for ($x=$horarioInicial; $x < $diaInteiro; $x = $x + 4) { 
-                if ($x >= 12 && !empty($horarioInicial)) {
-                    echo "<div class='divh2'><br> - PM $x </div>"; 
-                } else {
-                    echo "<div class='divh2'><br> - AM $x </div>";    
-                }
-            }
-            echo "<div class='divh2'><br><br>Seu remédio é de $intervalo/$intervalo horas. </div>";
-            break;
+$interacoes = (int) (24 / $intervalo);
+$horariosRemedio = [];
+$cabecalho = "<h2> HORÁRIOS DO SEU REMÉDIO </h2>";
 
-        case 6:
-            $resultado = $diaInteiro / $intervalo;
-            for ($x=$horarioInicial; $x < $diaInteiro; $x = $x + 6) { 
-                if ($x >= 12) {
-                    echo "<div class='divh2'><br> - PM $x </div>"; 
-                } else {
-                    echo "<div class='divh2'><br> - AM $x </div>";    
-                }
-            }
-            echo "<div class='divh2'><br><br>Seu remédio é de $intervalo/$intervalo horas. </div>";
-            break;
-        case 8:
-            $resultado = $diaInteiro / $intervalo;
-            for ($x=$horarioInicial; $x < $diaInteiro; $x = $x + 8) { 
-                if ($x >= 12) {
-                    echo "<div class='divh2'><br> - PM $x </div>";
-                } else {
-                    echo "<div class='divh2'><br> - AM $x </div>";   
-                }
-            }
-            echo "<div class='divh2'><br><br>Seu remédio é de $intervalo/$intervalo horas. </div>";
-            break;
-            case 12:
-                $resultado = $diaInteiro / $intervalo;
-                for ($x=$horarioInicial; $x < $diaInteiro; $x = $x + 12) { 
-                    if ($x >= 12) {
-                        echo "<div class='divh2'><br> - PM $x </div>";
-                    } else {
-                        echo "<div class='divh2'><br> - AM $x </div>";    
-                    }
-                    
-            }
-            echo "<div class='divh2'><br><br>Seu remédio é de $intervalo/$intervalo horas. </div>";
-            break;
-            
-    }
+switch ($intervalo) {
+
+    case 2:
+        for ($i = 0; $i < $interacoes; $i++) {
+            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+        }
+        echo $cabecalho;
+        foreach ($horariosRemedio as $value) {
+            echo $value . " h<br>";
+        }
+        echo "<pre>";
+        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+        break;
+
+    case 4:
+        for ($i = 0; $i < $interacoes; $i++) {
+            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+        }
+        echo $cabecalho;
+        foreach ($horariosRemedio as $value) {
+            echo $value . "<br>";
+        }
+        echo "<pre>";
+        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+        break;
+
+    case 6:
+        for ($i = 0; $i < $interacoes; $i++) {
+            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+        }
+        echo $cabecalho;
+        foreach ($horariosRemedio as $value) {
+            echo $value . "<br>";
+        }
+        echo "<pre>";
+        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+        break;
+
+    case 8:
+        for ($i = 0; $i < $interacoes; $i++) {
+            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+        }
+        echo $cabecalho;
+        foreach ($horariosRemedio as $value) {
+            echo $value . "<br>";
+        }
+        echo "<pre>";
+        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+        break;
+
+    case 12:
+        for ($i = 0; $i < $interacoes; $i++) {
+            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+        }
+        echo $cabecalho;
+        foreach ($horariosRemedio as $value) {
+            echo $value . "<br>";
+        }
+        echo "<pre>";
+        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+        break;
+}
+
+?>
+
+</body>
+
+</html>
+
