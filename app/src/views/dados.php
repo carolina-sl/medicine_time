@@ -3,6 +3,7 @@
 require __DIR__ . '/../classes/Pessoa.php';
 require __DIR__ . '/../classes/Remedio.php';
 require __DIR__ . '/../classes/Request.php';
+require __DIR__ . '/../classes/FormValidation.php';
 
 ?>
 
@@ -39,19 +40,24 @@ require __DIR__ . '/../classes/Request.php';
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Nome:</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="nome">
+            <input type="text" class="form-control" name="nome" id="exampleFormControlInput1" value="<?php echo !empty($_POST['nome']) ? $_POST['nome'] : ''; ?>" required>
+            <?php
+                $nome = !empty($_POST['nome']) ? $_POST['nome'] : 0;
+                $nomeValidate = new FormValidation();
+                $nomeValidate->nameValidate($nome);
+            ?>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Remédio:</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="remedio">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="remedio" value="<?php echo !empty($_POST['remedio']) ? $_POST['remedio'] : ''; ?>" required>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Intervalo (horas):</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="intervalo">
+            <input type="number" class="form-control" id="exampleFormControlInput1" name="intervalo" value="<?php echo !empty($_POST['intervalo']) ? $_POST['intervalo'] : ''; ?>" required>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Horário Inicial</label>
-            <input type="time" class="form-control" id="exampleFormControlInput1" name="horario">
+            <input type="time" class="form-control" id="exampleFormControlInput1" name="horario" value="<?php echo !empty($_POST['horario']) ? $_POST['horario'] : ''; ?>" required>
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">ENVIAR</button>
@@ -63,15 +69,17 @@ require __DIR__ . '/../classes/Request.php';
 <?php
 
 $diaInterio = 24;
-
+var_dump($_SERVER['REQUEST_METHOD']);
 $nome = !empty($_POST['nome']) ? $_POST['nome'] : 0;
 $remedio = !empty($_POST['remedio']) ? $_POST['remedio'] : 0;
 $intervalo = !empty($_POST['intervalo']) ? $_POST['intervalo'] : 1;
 $horario = !empty($_POST['horario']) ? $_POST['horario'] : 0;
 
+
 $interacoes = (int) (24 / $intervalo);
 $horariosRemedio = [];
-$cabecalho = "<h2> HORÁRIOS DO SEU REMÉDIO </h2>";
+$cabecalho = "<h2> OLÁ $nome, HORÁRIOS DO SEU REMÉDIO </h2>";
+
 
 switch ($intervalo) {
 
@@ -80,6 +88,7 @@ switch ($intervalo) {
             $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
         }
         echo $cabecalho;
+       
         foreach ($horariosRemedio as $value) {
             echo $value . " h<br>";
         }
@@ -93,7 +102,7 @@ switch ($intervalo) {
         }
         echo $cabecalho;
         foreach ($horariosRemedio as $value) {
-            echo $value . "<br>";
+            echo $value . " h<br>";
         }
         echo "<pre>";
         echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
@@ -105,7 +114,7 @@ switch ($intervalo) {
         }
         echo $cabecalho;
         foreach ($horariosRemedio as $value) {
-            echo $value . "<br>";
+            echo $value . " h<br>";
         }
         echo "<pre>";
         echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
@@ -117,7 +126,7 @@ switch ($intervalo) {
         }
         echo $cabecalho;
         foreach ($horariosRemedio as $value) {
-            echo $value . "<br>";
+            echo $value . " h<br>";
         }
         echo "<pre>";
         echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
@@ -129,7 +138,7 @@ switch ($intervalo) {
         }
         echo $cabecalho;
         foreach ($horariosRemedio as $value) {
-            echo $value . "<br>";
+            echo $value . " h<br>";
         }
         echo "<pre>";
         echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
