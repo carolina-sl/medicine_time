@@ -40,24 +40,27 @@ require __DIR__ . '/../classes/FormValidation.php';
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Nome:</label>
-            <input type="text" class="form-control" name="nome" id="exampleFormControlInput1" value="<?php echo !empty($_POST['nome']) ? $_POST['nome'] : ''; ?>" required>
+            <input type="text" class="form-control" name="nome" id="exampleFormControlInput1" value="<?php echo !empty($_POST['nome']) ? $_POST['nome'] : ''; ?>">
             <?php
-                $nome = !empty($_POST['nome']) ? $_POST['nome'] : 0;
-                $nomeValidate = new FormValidation();
-                $nomeValidate->nameValidate($nome);
+                $nome = !empty($_POST['nome']) ? $_POST['nome'] : '';
+                echo FormValidation::stringValidate($nome);
             ?>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Remédio:</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="remedio" value="<?php echo !empty($_POST['remedio']) ? $_POST['remedio'] : ''; ?>" required>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="remedio" value="<?php echo !empty($_POST['remedio']) ? $_POST['remedio'] : ''; ?>">
+            <?php
+                $remedio = !empty($_POST['remedio']) ? $_POST['remedio'] : '';
+                echo FormValidation::stringValidate($remedio);
+            ?>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Intervalo (horas):</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" name="intervalo" value="<?php echo !empty($_POST['intervalo']) ? $_POST['intervalo'] : ''; ?>" required>
+            <input type="number" class="form-control" id="exampleFormControlInput1" name="intervalo" value="<?php echo !empty($_POST['intervalo']) ? $_POST['intervalo'] : ''; ?>">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Horário Inicial</label>
-            <input type="time" class="form-control" id="exampleFormControlInput1" name="horario" value="<?php echo !empty($_POST['horario']) ? $_POST['horario'] : ''; ?>" required>
+            <input type="time" class="form-control" id="exampleFormControlInput1" name="horario" value="<?php echo !empty($_POST['horario']) ? $_POST['horario'] : ''; ?>">
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">ENVIAR</button>
@@ -69,7 +72,7 @@ require __DIR__ . '/../classes/FormValidation.php';
 <?php
 
 $diaInterio = 24;
-var_dump($_SERVER['REQUEST_METHOD']);
+
 $nome = !empty($_POST['nome']) ? $_POST['nome'] : 0;
 $remedio = !empty($_POST['remedio']) ? $_POST['remedio'] : 0;
 $intervalo = !empty($_POST['intervalo']) ? $_POST['intervalo'] : 1;
@@ -78,71 +81,75 @@ $horario = !empty($_POST['horario']) ? $_POST['horario'] : 0;
 
 $interacoes = (int) (24 / $intervalo);
 $horariosRemedio = [];
-$cabecalho = "<h2> OLÁ $nome, HORÁRIOS DO SEU REMÉDIO </h2>";
+$cabecalho = "<h4> $nome, HORÁRIOS DO SEU REMÉDIO: </h4>";
 
 
-switch ($intervalo) {
+if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::stringValidate($remedio))) {
+    
+    switch ($intervalo) {
 
-    case 2:
-        for ($i = 0; $i < $interacoes; $i++) {
-            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
-        }
-        echo $cabecalho;
-       
-        foreach ($horariosRemedio as $value) {
-            echo $value . " h<br>";
-        }
-        echo "<pre>";
-        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
-        break;
+        case 2:
+            for ($i = 0; $i < $interacoes; $i++) {
+                $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+            }
+            echo $cabecalho;
+        
+            foreach ($horariosRemedio as $value) {
+                echo $value . " h<br>";
+            }
+            echo "<pre>";
+            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            break;
 
-    case 4:
-        for ($i = 0; $i < $interacoes; $i++) {
-            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
-        }
-        echo $cabecalho;
-        foreach ($horariosRemedio as $value) {
-            echo $value . " h<br>";
-        }
-        echo "<pre>";
-        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
-        break;
+        case 4:
+            for ($i = 0; $i < $interacoes; $i++) {
+                $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+            }
+            echo $cabecalho;
+            foreach ($horariosRemedio as $value) {
+                echo $value . " h<br>";
+            }
+            echo "<pre>";
+            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            break;
 
-    case 6:
-        for ($i = 0; $i < $interacoes; $i++) {
-            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
-        }
-        echo $cabecalho;
-        foreach ($horariosRemedio as $value) {
-            echo $value . " h<br>";
-        }
-        echo "<pre>";
-        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
-        break;
+        case 6:
+            for ($i = 0; $i < $interacoes; $i++) {
+                $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+            }
+            echo $cabecalho;
+            foreach ($horariosRemedio as $value) {
+                echo $value . " h<br>";
+            }
+            echo "<pre>";
+            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            break;
 
-    case 8:
-        for ($i = 0; $i < $interacoes; $i++) {
-            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
-        }
-        echo $cabecalho;
-        foreach ($horariosRemedio as $value) {
-            echo $value . " h<br>";
-        }
-        echo "<pre>";
-        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
-        break;
+        case 8:
+            for ($i = 0; $i < $interacoes; $i++) {
+                $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+            }
+            echo $cabecalho;
+            foreach ($horariosRemedio as $value) {
+                echo $value . " h<br>";
+            }
+            echo "<pre>";
+            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            break;
 
-    case 12:
-        for ($i = 0; $i < $interacoes; $i++) {
-            $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+        case 12:
+            for ($i = 0; $i < $interacoes; $i++) {
+                $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
+            }
+            echo $cabecalho;
+            foreach ($horariosRemedio as $value) {
+                echo $value . " h<br>";
+            }
+            echo "<pre>";
+            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            break;
+
         }
-        echo $cabecalho;
-        foreach ($horariosRemedio as $value) {
-            echo $value . " h<br>";
-        }
-        echo "<pre>";
-        echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
-        break;
 }
 
 ?>
