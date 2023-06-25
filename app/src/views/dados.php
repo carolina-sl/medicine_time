@@ -27,7 +27,7 @@ require __DIR__ . '/../classes/FormValidation.php';
        <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="dados.php">Home</a>
                 </li>
             </ul>
         </div>
@@ -64,13 +64,12 @@ require __DIR__ . '/../classes/FormValidation.php';
         </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">ENVIAR</button>
-            <button type="reset" class="btn btn-danger" href="index.php">LIMPAR</button>
+            <a type="reset" class="btn btn-danger" href="dados.php" id="limpar">LIMPAR</a>
         </div>
     </div>
 </form>
 
 <?php
-
 $diaInterio = 24;
 
 $nome = !empty($_POST['nome']) ? $_POST['nome'] : 0;
@@ -78,25 +77,53 @@ $remedio = !empty($_POST['remedio']) ? $_POST['remedio'] : 0;
 $intervalo = !empty($_POST['intervalo']) ? $_POST['intervalo'] : 1;
 $horario = !empty($_POST['horario']) ? $_POST['horario'] : 0;
 
-
 $interacoes = (int) (24 / $intervalo);
 $horariosRemedio = [];
-$cabecalho = "<h4> $nome, HORÁRIOS DO SEU REMÉDIO: </h4>";
-
+$cabecalho = "<h4> HORÁRIOS DO SEU REMÉDIO: </h4>";
+$value = " - ";
+$tabelaHoraDoRemedio = "
+            <table class='table'>
+            <thead>
+              <tr>
+                <th scope='col'>Horários</th>
+                <th scope='col'>Remédio</th>
+                <th scope='col'>Intervalo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope='row'> $value </th>
+                <td>$remedio</td>
+                <td> $intervalo </td>
+              </tr>
+              <tr>
+                <th scope='row'> - </th>
+                <td> - </td>
+                <td> - </td>
+              </tr>
+              <tr>
+                <th scope='row'> - </th>
+                <td> - </td>
+                <td> - </td>
+              </tr>
+            </tbody>
+          </table>";
 
 if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::stringValidate($remedio))) {
     
     switch ($intervalo) {
-
         case 2:
             for ($i = 0; $i < $interacoes; $i++) {
                 $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
             }
+            
             echo $cabecalho;
-        
             foreach ($horariosRemedio as $value) {
-                echo $value . " h<br>";
+                $valor = $value;
+                $tabelaHoraDoRemedio.= "<th scope='row' >$valor h<th><br>";
+                
             }
+            echo $tabelaHoraDoRemedio;
             echo "<pre>";
             echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
             break;
@@ -149,7 +176,8 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
             echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
             break;
 
-        }
+    }
+
 }
 
 ?>
