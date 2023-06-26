@@ -1,13 +1,12 @@
-
 <?php
 
 
 class Request {
 
     public $dados = [
-        'data',
-        'lalala',
-        'copo'
+        'teste1',
+        'teste2',
+        'teste3'
     ];
 
     

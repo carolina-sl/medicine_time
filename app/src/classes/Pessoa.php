@@ -1,14 +1,15 @@
 <?php
 
+require_once 'Receita.php';
 
 class Pessoa {
 
-    public $nome;
-    public $idade;
-    public $cor;
-
+    public string $nome;
+    public string $dtNascimento;
+    public Receita $receita;
+    
     public function cadastrarPessoa($pessoa){
-        var_dump($pessoa);
+        
     }
 
 }
