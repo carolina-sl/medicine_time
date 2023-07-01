@@ -80,17 +80,16 @@ $horario = !empty($_POST['horario']) ? $_POST['horario'] : 0;
 $interacoes = (int) (24 / $intervalo);
 $horariosRemedio = [];
 $cabecalho = "<h4 align='center'> HORÁRIOS DO SEU REMÉDIO</h4>";
-$value = " - ";
+
 $tabelaHoraDoRemedio = "
-        <table class='table'>
+        <table class='table table-hover'>
             <thead>
                 <tr>
                     <th scope='row'>Horários</th>
                     <th scope='row'>Remédio</th>
-                    <th scope='row'>Intervalo (horas)</th>
+                    <th scope='row'>Intervalo (horas)</th>  
                 </tr>
-            </thead>
-        </table>";
+            <thead>";
 
 if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::stringValidate($remedio))) {
     
@@ -100,21 +99,17 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
                 $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
             }
             echo $cabecalho . "<br>";
-            echo $tabelaHoraDoRemedio;
             foreach ($horariosRemedio as $value) {
-                echo "<table class='table'>
+                $tabelaHoraDoRemedio .= "
                     <tbody>
                         <tr>
-                            <th scope='row'> $value </th>
+                            <td>$value</td>
                             <td>$remedio</td>
-                            <td> $intervalo </td>
+                            <td>$intervalo</td>
                         </tr>
-                    </tbody>
-                </table>";
+                    </tbody>";
             }
-            
-            echo "<pre>";
-            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            echo $tabelaHoraDoRemedio .= "</table>";
             break;
 
         case 4:
@@ -122,21 +117,17 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
                 $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
             }
             echo $cabecalho . "<br>";
-            echo $tabelaHoraDoRemedio;
             foreach ($horariosRemedio as $value) {
-                echo "<table class='table'>
+                $tabelaHoraDoRemedio .= "
                     <tbody>
                         <tr>
-                            <th scope='row'> $value </th>
+                            <td>$value</td>
                             <td>$remedio</td>
-                            <td> $intervalo </td>
+                            <td>$intervalo</td>
                         </tr>
-                    </tbody>
-                </table>";
+                    </tbody>";
             }
-            
-            echo "<pre>";
-            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            echo $tabelaHoraDoRemedio .= "</table>";
             break;
 
         case 6:
@@ -144,21 +135,17 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
                 $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
             }
             echo $cabecalho . "<br>";
-            echo $tabelaHoraDoRemedio;
             foreach ($horariosRemedio as $value) {
-                echo "<table class='table'>
+                $tabelaHoraDoRemedio .= "
                     <tbody>
                         <tr>
-                            <th scope='row'> $value </th>
+                            <td>$value</td>
                             <td>$remedio</td>
-                            <td> $intervalo </td>
+                            <td>$intervalo</td>
                         </tr>
-                    </tbody>
-                </table>";
+                    </tbody>";
             }
-            
-            echo "<pre>";
-            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            echo $tabelaHoraDoRemedio .= "</table>";
             break;
 
         case 8:
@@ -166,21 +153,17 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
                 $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
             }
             echo $cabecalho . "<br>";
-            echo $tabelaHoraDoRemedio;
             foreach ($horariosRemedio as $value) {
-                echo "<table class='table'>
+                $tabelaHoraDoRemedio .= "
                     <tbody>
                         <tr>
-                            <th scope='row'> $value </th>
+                            <td>$value</td>
                             <td>$remedio</td>
-                            <td> $intervalo </td>
+                            <td>$intervalo</td>
                         </tr>
-                    </tbody>
-                </table>";
+                    </tbody>";
             }
-            
-            echo "<pre>";
-            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            echo $tabelaHoraDoRemedio .= "</table>";
             break;
 
         case 12:
@@ -188,25 +171,19 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
                 $horariosRemedio[] = date('H:i', strtotime($horario . "+" . ($intervalo * ($i + 1)) . " hours"));
             }
             echo $cabecalho . "<br>";
-            echo $tabelaHoraDoRemedio;
             foreach ($horariosRemedio as $value) {
-                echo "<table class='table'>
+                $tabelaHoraDoRemedio .= "
                     <tbody>
                         <tr>
-                            <th scope='row'> $value </th>
+                            <td>$value</td>
                             <td>$remedio</td>
-                            <td> $intervalo </td>
+                            <td>$intervalo</td>
                         </tr>
-                    </tbody>
-                </table>";
+                    </tbody>";
             }
-            
-            echo "<pre>";
-            echo "<br><h3>Seu remédio é de $intervalo/$intervalo horas.<h3>";
+            echo $tabelaHoraDoRemedio .= "</table>";
             break;
-
     }
-
 }
 
 ?>
