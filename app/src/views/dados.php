@@ -82,14 +82,15 @@ $horariosRemedio = [];
 $cabecalho = "<h4 align='center'> HORÁRIOS DO SEU REMÉDIO</h4>";
 
 $tabelaHoraDoRemedio = "
-        <table class='table table-hover'>
-            <thead>
-                <tr>
-                    <th scope='row'>Horários</th>
-                    <th scope='row'>Remédio</th>
-                    <th scope='row'>Intervalo (horas)</th>  
-                </tr>
-            <thead>";
+        <div class='w-auto p-3'>
+            <table class='table table-hover'>
+                <thead>
+                    <tr>
+                        <th scope='row'>Horários</th>
+                        <th scope='row'>Remédio</th>
+                        <th scope='row'>Intervalo (horas)</th>  
+                    </tr>
+                <thead>";
 
 if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::stringValidate($remedio))) {
     
@@ -101,13 +102,14 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
             echo $cabecalho . "<br>";
             foreach ($horariosRemedio as $value) {
                 $tabelaHoraDoRemedio .= "
-                    <tbody>
-                        <tr>
-                            <td>$value</td>
-                            <td>$remedio</td>
-                            <td>$intervalo</td>
-                        </tr>
-                    </tbody>";
+                        <tbody>
+                            <tr>
+                                <td>$value</td>
+                                <td>$remedio</td>
+                                <td>$intervalo</td>
+                            </tr>
+                        </tbody>
+                    </div>";
             }
             echo $tabelaHoraDoRemedio .= "</table>";
             break;
