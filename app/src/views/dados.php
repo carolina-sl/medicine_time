@@ -130,8 +130,15 @@ if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::string
             }
             echo $cabecalho . "<br>";
             foreach ($horariosRemedio as $value) {
-                $tabelaHoraDoRemedio .= $tbody;
-                    
+                $tabelaHoraDoRemedio .= "
+                    <tbody>
+                        <tr>
+                            <td>$value</td>
+                            <td>$remedio</td>
+                            <td>$intervalo</td>
+                        </tr>
+                    </tbody>
+                </div>";
             }
             echo $tabelaHoraDoRemedio .= "</table>";
             break;

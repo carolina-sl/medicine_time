@@ -35,6 +35,10 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Intervalo (horas):</label>
                 <input type="number" class="form-control" id="exampleFormControlInput1" name="intervalo" value="<?php echo !empty($_POST['intervalo']) ? $_POST['intervalo'] : ''; ?>">
+                <?php 
+                    $intervalo = !empty($_POST['intervalo']) ? $_POST['intervalo'] : '';
+                    echo FormValidation::intervaloValidate($intervalo);
+                ?>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Horário Inicial</label>

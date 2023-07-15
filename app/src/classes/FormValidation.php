@@ -10,4 +10,13 @@ class FormValidation {
         }
     }
 
+    public static function intervaloValidate($intervalo) {
+        $arrayValores = [2, 4, 6, 8, 12];
+        
+        if (!empty($intervalo) && !in_array($intervalo, $arrayValores)) {
+            return "<p style='color:red;'> Valor inválido.</p>";
+        }
+
+    }
+
 }
