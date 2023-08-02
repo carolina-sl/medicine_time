@@ -46,7 +46,6 @@ $tbody = "
     </div>";
 
 if (empty(FormValidation::stringValidate($nome)) && empty(FormValidation::stringValidate($remedio))) {
-    
     switch ($intervalo) {
         case 2:
             for ($i = 0; $i < $interacoes; $i++) {
